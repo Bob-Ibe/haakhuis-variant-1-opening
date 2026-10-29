@@ -172,7 +172,7 @@ const HHUI = (() => {
             </div>
             <div>
               <h4>Haakhuis</h4>
-              <ul>${NAV.map((n) => `<li><a href="${n.href}">${n.label}</a></li>`).join('')}</ul>
+              <ul>${NAV.map((n) => `<li><a href="${n.href}">${n.label}</a></li>`).join('')}<li><a href="${home}#contact">Afspraak maken</a></li></ul>
             </div>
             <div>
               <h4>Contact</h4>
@@ -180,14 +180,6 @@ const HHUI = (() => {
                 <li><a href="mailto:${b.email}">${b.email}</a></li>
                 <li><a href="tel:+${b.telIntl}">${b.tel}</a></li>
                 <li>${b.straat}<br>${b.postcode} ${b.plaats}</li>
-              </ul>
-            </div>
-            <div>
-              <h4>Bezoek</h4>
-              <ul>
-                <li>${b.openingstijden}</li>
-                <li><a href="verstelwerk.html#boeken">Afspraak verstelwerk</a></li>
-                <li><a href="workshops.html">Workshop boeken</a></li>
               </ul>
             </div>
           </div>

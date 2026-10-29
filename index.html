@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=10">
+  <link rel="stylesheet" href="css/style.css?v=11">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"LocalBusiness","name":"Haakhuis","description":"Naaiatelier en haakstudio: haakpatronen, carnavalskleding op maat, verstelwerk en workshops.","email":"info@haakhuis.nl","telephone":"+31642977505","url":"https://www.haakhuis.nl","address":{"@type":"PostalAddress","streetAddress":"Wachtendonckstraat 28","postalCode":"6371 VW","addressLocality":"Landgraaf","addressCountry":"NL"},"geo":{"@type":"GeoCoordinates","latitude":50.8988968,"longitude":6.0212302}}
   </script>
@@ -24,7 +24,7 @@
     <div class="intro-title"><span class="intro-eyebrow">Naaiatelier &amp; haakstudio · Landgraaf</span><b>haakhuis</b></div>
     <button class="intro-skip" type="button">Sla over</button>
   </div>
-  <script src="js/opening.js?v=10"></script>
+  <script src="js/opening.js?v=11"></script>
   <header data-site-head></header>
 
   <main>
@@ -171,20 +171,6 @@
       </div>
     </section>
 
-    <!-- ============ Workshops ============ -->
-    <section class="section">
-      <div class="wrap">
-        <div class="section-head" data-reveal style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;max-width:none;flex-wrap:wrap">
-          <div style="max-width:620px">
-            <span class="eyebrow">Binnenkort in het atelier</span>
-            <h2>Eerstvolgende workshops</h2>
-          </div>
-          <a class="link-arrow" href="workshops.html">Alle workshops <i>→</i></a>
-        </div>
-        <div class="ws-grid" id="wsPreview"></div>
-      </div>
-    </section>
-
     <!-- ============ FAQ ============ -->
     <section class="section section-tint">
       <div class="wrap">
@@ -193,12 +179,9 @@
           <h2>Goed om te weten</h2>
         </div>
         <div class="faq" data-reveal>
-          <details><summary>Kan ik zonder afspraak langskomen?</summary><div>Haakhuis werkt alleen op afspraak. Zo hebben we echt tijd voor je. Een afspraak maak je op de pagina <a href="verstelwerk.html#boeken">verstelwerk</a>, of stuur gewoon een mail.</div></details>
+          <details><summary>Kan ik zonder afspraak langskomen?</summary><div>Haakhuis werkt alleen op afspraak. Zo hebben we echt tijd voor je. Kies hieronder direct een moment in de <a href="#contact">agenda</a>.</div></details>
           <details><summary>Hoe betaal ik?</summary><div>Na je afspraak of inschrijving krijg je een betaalverzoek per mail of WhatsApp. Betalen in het atelier kan ook.</div></details>
-          <details><summary>Hoe lang duurt verstelwerk?</summary><div>Dat hangt af van de klus. Een broek inkorten is meestal binnen een week klaar. Bij het brengen hoor je wanneer je het kunt ophalen.</div></details>
           <details><summary>Wanneer moet ik mijn carnavalspak aanvragen?</summary><div>Het liefst voor 1 december, dan is er nog volop keuze in stoffen. Aanvragen voor maatwerk kunnen tot begin januari. Kijk op de pagina <a href="carnaval.html">carnaval</a> voor de planning.</div></details>
-          <details><summary>Kan ik haakpatronen ook direct bij Haakhuis kopen?</summary><div>De patronen staan op Ravelry. Daar betaal je veilig en download je het patroon meteen, in het Nederlands of Engels.</div></details>
-          <details><summary>Geven jullie ook workshops voor groepen?</summary><div>Ja, voor een vriendinnengroep, een vereniging of een uitje. Stuur een mail met jullie wensen en het aantal personen.</div></details>
         </div>
       </div>
     </section>
@@ -208,7 +191,7 @@
       <div class="wrap">
         <div class="section-head" data-reveal>
           <span class="eyebrow">Contact en afspraak</span>
-          <h2>Plan direct een afspraak</h2>
+          <h2 id="contactTitle">Plan direct een afspraak</h2>
           <p class="lead">Kies een moment dat jou past. Je ziet meteen welke dagen en tijden er vrij zijn in het atelier.</p>
         </div>
         <div class="booker" id="verstelBooker" data-mode="contact">
@@ -270,32 +253,16 @@
             </div>
           </aside>
         </div>
-        <div class="section-head" data-reveal style="margin-top:clamp(48px,6vw,80px)">
-          <span class="eyebrow">Liever eerst contact?</span>
-          <h2 style="font-size:clamp(26px,3vw,36px)">Kom langs in Landgraaf</h2>
-        </div>
-        <div class="contact">
-          <div class="contact-card" data-reveal>
-            <a class="contact-line" data-href="mail"><span class="ic" data-icon="mail"></span><span><small>E-mail</small><b data-fill="email"></b></span></a>
-            <a class="contact-line" data-href="tel"><span class="ic" data-icon="tel"></span><span><small>Telefoon</small><b data-fill="tel"></b></span></a>
-            <a class="contact-line" href="https://www.openstreetmap.org/?mlat=50.8988968&amp;mlon=6.0212302#map=17/50.8989/6.0212" target="_blank" rel="noopener"><span class="ic" data-icon="pin"></span><span><small>Adres</small><b data-fill="adres"></b></span></a>
-            <div class="contact-line"><span class="ic" data-icon="klok"></span><span><small>Openingstijden</small><b data-fill="open"></b></span></div>
-            <a class="btn magnetic" data-href="mail" style="align-self:flex-start">Stuur ons een bericht <i>→</i></a>
+        <div class="contact-strip" data-reveal>
+          <div class="cs-items">
+            <a class="cs-item" data-href="tel"><span class="ic" data-icon="tel"></span><span><small>Bellen</small><b data-fill="tel"></b></span></a>
+            <a class="cs-item" data-href="wa" href="#" target="_blank" rel="noopener"><span class="ic" data-icon="whatsapp"></span><span><small>WhatsApp</small><b>App ons direct</b></span></a>
+            <a class="cs-item" data-href="mail"><span class="ic" data-icon="mail"></span><span><small>E-mail</small><b data-fill="email"></b></span></a>
+            <a class="cs-item" href="https://www.google.com/maps?cid=18015221377923114563" target="_blank" rel="noopener"><span class="ic" data-icon="pin"></span><span><small>Route</small><b>Wachtendonckstraat 28, Landgraaf</b></span></a>
           </div>
-          <div class="qr-card" data-reveal>
-            <span class="eyebrow">Direct contact</span>
-            <h3>App ons via WhatsApp</h3>
-            <div class="qr-machine">
-              <canvas tabindex="0" role="img" aria-label="Naaimachine die een QR-code wordt. Scan de code om Haakhuis te appen."></canvas>
-              <p class="qr-hint">Klik op de naaimachine · <b>scan om ons te appen</b></p>
-            </div>
-            <a class="btn btn-wa btn-sm" data-href="wa" href="#" target="_blank" rel="noopener"><span data-icon="whatsapp" class="wa-ic"></span> Of tik hier om te appen</a>
-          </div>
-        </div>
-        <div class="contact-map">
-          <div class="map" data-reveal>
-            <iframe title="Kaart: Haakhuis, Wachtendonckstraat 28 in Landgraaf" loading="lazy"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=6.0132%2C50.8955%2C6.0292%2C50.9023&amp;layer=mapnik&amp;marker=50.8988968%2C6.0212302"></iframe>
+          <div class="cs-qr qr-machine">
+            <canvas tabindex="0" role="img" aria-label="Naaimachine die een QR-code wordt. Scan de code om Haakhuis te appen."></canvas>
+            <p class="qr-hint">Scan om ons te appen</p>
           </div>
         </div>
       </div>
@@ -304,11 +271,11 @@
 
   <footer data-site-foot></footer>
 
-  <script src="js/config.js?v=10"></script>
-  <script src="js/main.js?v=10"></script>
-  <script src="js/booking.js?v=10"></script>
-  <script src="js/scenes.js?v=10"></script>
-  <script src="js/fx.js?v=10"></script>
-  <script src="js/haakhuis-qr.js?v=10"></script>
+  <script src="js/config.js?v=11"></script>
+  <script src="js/main.js?v=11"></script>
+  <script src="js/booking.js?v=11"></script>
+  <script src="js/scenes.js?v=11"></script>
+  <script src="js/fx.js?v=11"></script>
+  <script src="js/haakhuis-qr.js?v=11"></script>
 </body>
 </html>

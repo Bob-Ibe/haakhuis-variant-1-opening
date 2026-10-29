@@ -84,7 +84,7 @@
     function resize() { dpr = Math.min(2, devicePixelRatio || 1); W = canvas.clientWidth; canvas.width = canvas.height = W * dpr; }
     function setTarget(v) {
       from = k; to = v; t0 = performance.now();
-      if (hint) hint.innerHTML = v ? 'Scan om ons te appen · <b>klik voor de naaimachine</b>' : 'Klik op de naaimachine · <b>scan om ons te appen</b>';
+      if (hint) hint.innerHTML = v ? '<b>Scan om ons te appen</b>' : 'Klik op de naaimachine';
       wrap.classList.toggle('is-qr', !!v);
     }
 
