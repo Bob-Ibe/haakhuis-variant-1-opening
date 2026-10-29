@@ -8,11 +8,16 @@
   const intro = document.getElementById('intro');
   if (!intro) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced || /[?&]skip/.test(location.search)) { intro.remove(); return; }
+  // alleen bij het eerste bezoek in deze sessie, en niet als je via een link naar een sectie springt (bv. #contact)
+  let seen = false;
+  try { seen = sessionStorage.getItem('hh-intro') === '1'; } catch (e) { /* geen opslag: gewoon tonen */ }
+  const force = /[?&]intro/.test(location.search);
+  if (!force && (reduced || /[?&]skip/.test(location.search) || location.hash || seen)) { intro.remove(); return; }
+  try { sessionStorage.setItem('hh-intro', '1'); } catch (e) { /* negeren */ }
   document.documentElement.classList.add('intro-lock');
 
   const cv = intro.querySelector('canvas'), ctx = cv.getContext('2d');
-  let W, H, dpr, pts = [];
+  let W, H, dpr, pts = [], CY = 0, SZ = 0;
   const PAL = ['255,236,248', '255,236,248', '255,236,248', '255,236,248', '228,190,214', '237,11,240'];
   const CONF = ['#ED0BF0', '#086ABD', '#ffd34d', '#ffffff', '#D6B0C8'];
   const ease = (t) => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
@@ -20,7 +25,7 @@
 
   /* vorm tekenen op een verborgen canvas en de witte pixels bemonsteren */
   function shapePoints() {
-    const s = Math.min(W, H) * .74, off = document.createElement('canvas');
+    const s = SZ, off = document.createElement('canvas');
     off.width = off.height = Math.round(s);
     const o = off.getContext('2d'), k = s / 48;
     o.fillStyle = o.strokeStyle = '#fff';
@@ -42,11 +47,16 @@
   function build() {
     dpr = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight;
     cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // de vorm past altijd in de ruimte boven de titel, zodat de tekst nooit overlapt
+    const titleTop = intro.querySelector('.intro-title').getBoundingClientRect().top;
+    const top = Math.min(72, H * .08), gap = Math.max(24, H * .04);
+    const avail = Math.max(120, titleTop - gap - top);
+    SZ = Math.round(Math.min(W * .84, avail, 760)); CY = top + avail / 2;
     const { out, step } = shapePoints();
     pts = out.map(([x, y]) => {
       const a = Math.random() * 6.29, r = Math.max(W, H) * (.5 + Math.random() * .6);
       return {
-        tx: W / 2 + x, ty: H / 2 + y, sx: W / 2 + Math.cos(a) * r, sy: H / 2 + Math.sin(a) * r,
+        tx: W / 2 + x, ty: CY + y, sx: W / 2 + Math.cos(a) * r, sy: CY + Math.sin(a) * r,
         c: PAL[(Math.random() * PAL.length) | 0], conf: CONF[(Math.random() * CONF.length) | 0],
         d: Math.random() * .45, tw: Math.random() * 6.29, size: Math.max(1.8, step * .5),
         vx: (Math.random() - .5) * 14, vy: -4 - Math.random() * 10, rot: Math.random() * 6.29,
@@ -67,11 +77,11 @@
       let x, y, a = 1;
       const f = ease(clamp((t / FORM - p.d) / (1 - p.d)));
       x = p.sx + (p.tx - p.sx) * f + mx * (p.ty / H - .5) * 10;
-      y = p.sy + (p.ty - p.sy) * f + my * (p.tx / W - .5) * 10 - H * .08;
+      y = p.sy + (p.ty - p.sy) * f + my * (p.tx / W - .5) * 10;
       const tw = .78 + .22 * Math.sin(now / 420 + p.tw);
       if (lp > 0) {
         // uiteen als confetti: naar buiten, vallen, draaien
-        const e = lp * lp, dx = p.tx - W / 2, dy = p.ty - H / 2;
+        const e = lp * lp, dx = p.tx - W / 2, dy = p.ty - CY;
         x += dx * e * 1.6 + p.vx * lp * 30; y += dy * e * 1.6 + (p.vy * lp + lp * lp * 22) * 30; a = 1 - clamp((lp - .55) / .45);
         ctx.save(); ctx.translate(x, y); ctx.rotate(p.rot + lp * 8); ctx.globalAlpha = a; ctx.fillStyle = lp > .12 ? p.conf : `rgb(${p.c})`;
         ctx.fillRect(-p.size, -p.size * .5, p.size * 2.2, p.size * 1.1); ctx.restore();

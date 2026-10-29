@@ -314,3 +314,20 @@ const HHUI = (() => {
 })();
 
 document.addEventListener('DOMContentLoaded', () => { HHUI.init(); window.dispatchEvent(new Event('hh:ready')); });
+
+/* link naar een sectie op een andere pagina (bv. index.html#contact): na het opbouwen van de pagina alsnog daarheen.
+   Direct springen (geen soepel scrollen, dat wordt vlak na het laden afgebroken) en nog eens bijstellen
+   als de lettertypes binnen zijn, tenzij de bezoeker zelf al scrolt. */
+window.addEventListener('load', () => {
+  if (!location.hash || location.hash.length < 2) return;
+  let el = null;
+  try { el = document.querySelector(location.hash); } catch (e) { return; }
+  if (!el) return;
+  let touched = false;
+  const stop = () => { touched = true; };
+  ['wheel', 'touchstart', 'keydown'].forEach((ev) => addEventListener(ev, stop, { once: true, passive: true }));
+  const jump = () => { if (!touched) el.scrollIntoView({ behavior: 'instant', block: 'start' }); };
+  setTimeout(jump, 120);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => setTimeout(jump, 60));
+  setTimeout(jump, 900);
+});
